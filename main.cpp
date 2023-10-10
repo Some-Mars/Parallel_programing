@@ -22,5 +22,17 @@ int main(){
     //Вектор содержащий число потоков
     vector<int> threadsAmount = {1, 2, 4};
     
+    // Создаём вектор нужного числа потоков
+    for(size_t j = 0; j < threadsAmount.size(); j++){
+        vector<thread> threads;
+        // Добавляем потоки
+        for(int k = 0; k <threadsAmount[j]; k++){
+            threads.emplace_back(mineXryuCoin, &(xryu_coin));
+        }
+        // Запускается майнинг
+        for(thread& th: threads){
+            th.join();
+        }
+    
     return 0;
 }
