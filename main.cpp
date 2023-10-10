@@ -29,10 +29,22 @@ int main(){
         for(int k = 0; k <threadsAmount[j]; k++){
             threads.emplace_back(mineXryuCoin, &(xryu_coin));
         }
+
+        // Старт таймера
+        clock_t startTime = clock();
         // Запускается майнинг
         for(thread& th: threads){
             th.join();
         }
+        // Конец таймера
+        clock_t endTime = clock();
+        // Время для майнинга 1 Хрюкоина
+        double deltaTime = static_cast<double>(endTime - startTime) / CLOCKS_PER_SEC;
+        
+        cout << "Кол-во потоков: " << threadsAmount[j] << ", Секунд для майнинга 1 Хрюкоина: " << deltaTime << " секунд." << endl;
+        cout << "Дней до Хрюкоин-миллионерства: " << deltaTime*1000000 << endl;
+        xryu_coin = 0.0;
+    }
     
     return 0;
 }
